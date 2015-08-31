@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact</title>
+<script src="contact.js"></script>
+
+<script>
+
+	function restoreUI() {
+        var divList = document.getElementById('divList');
+        divList.style.display = "block";
+        var divDetails = document.getElementById('divDetails');
+        divDetails.style.marginLeft = "420px";
+    }
+
+	var currentContact = [];
+	var c1 = new Contact('Chayapol','Moemeng','0899999999');
+	var c2 = new Contact('Natila','Ngaoprateeptham','0888888888');
+	var c3 = new Contact('Prateep','D.','0877777777');
+
+// 	var list = new... ; not recommended
+	var list = [];
+	list[0] = c1;
+	list[1] = c2;
+	list[2] = c3;
+
+
+// 	Populate list into tabke
+
+	console.log(c1.fullname()); // to print to the console
+	c1.sayHello();
+	c1.sayHi();
+</script>
+
+<style>
+#divList, #divDetails {
+	border: 1px solid black;
+	width: 400px;
+	height: 600px;
+}
+
+#divList {
+	float: left;
+}
+
+#divDetails {
+	/*padding-left: 30px;*/
+	margin-left: 410px;
+	z-index: 999; 	/* positive - top*/
+}
+
+h1{
+	margin-left: 30px;
+}
+
+.avatar {
+	width: 80px;
+	height: auto;
+
+}
+
+.fullname{
+	padding: 5px 0;
+	font: bold 20px arial;
+	margin-left: 20px;
+}
+
+.phone{
+	color: gray;
+	font: normal 15px arial;
+	margin-left: 20px;
+}
+
+img{
+	margin-left: 20px;
+}
+
+table{
+	margin-top: 30px;
+}
+
+.back{
+	width: 20px;
+	height: auto;
+	padding: 20px 0;
+}
+
+button{
+	background: transparent;
+	border-color: transparent;
+}
+
+.detail{
+	font: normal 18px arial;
+	margin-left: 30px;
+}
+
+
+</style>
+
+</head>
+<body>
+
+	<div id="divList">
+		<h1>List</h1>
+		<table id="tabList">
+			
+		</table>
+		<span id="spanList">
+			
+		<span>
+	</div>
+	
+	<div id="divDetails">
+		<button onclick="restoreUI()" id="btnBack"><img src="img/back.png" class="back"></button>
+		<h1><span id="spanFullName"></span></h1>
+		<img src="">
+		<p class="detail">Phone : </p><span id="spanPhone"></span><br>
+		<p class="detail">Email : </p><span id="spanEmail"></span>
+	</div>
+
+	<script>
+		var tabList = document.getElementById('tabList');
+		for(var i in list){
+			var r = tabList.insertRow(tabList.rows.length); // insert at the last  --- to insert at the top change to 0
+			r.onclick = function(){
+				var divList = document.getElementById('divList');
+				divList.style.display ='none';
+				var divDetails = document.getElementById('divDetails');
+				divDetails.style.marginLeft='0px';
+
+				console.log('clicked' + i);
+				currentContact = list[this.rowIndex];
+				document.getElementById('spanFullName').innerHTML = currentContact.fullname();
+				document.getElementById('spanPhone').innerHTML = currentContact.phone;
+				document.getElementById('spanEmail').innerHTML = currentContact.email;
+
+			};
+			c0 = r.insertCell(0);
+			c1 = r.insertCell(1);
+			// c2 = r.insertCell(2);
+			c0.innerHTML = "<img src='img/blank.jpg' class='avatar'>";
+			// c0.innerHTML = "<img src='" + list[i].picture + "' class='avatar'>";
+			c1.innerHTML = "<span class='fullname'>" + list[i].fullname() + "</span> <br>" + 
+			"<span class='phone'>" + list[i].phone +"</span>";
+			// c2.innerHTML = list[i].phone();
+		}
+
+
+
+	</script>
+
+</body>
+
+
+
+</html>
