@@ -4,7 +4,7 @@ function Contact(fname,lname,phone) {
     this.lastname = lname;
     this.phone = phone;
     this.email = '';	// not in param list, not required
-    this.picture = '';
+    this.picture = 'img/blank.jpg';
     this.fullname = function() {
         return this.firstname+' '+this.lastname;
     }
