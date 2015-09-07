@@ -1,0 +1,117 @@
+<!DCOTYPE html>
+<head>
+    <title>Contacts</title>
+<script src="js/contact.js"></script>
+<link rel="stylesheet" type="text/css" href="custom.css">
+<script src="js/jquery-1.11.3.min.js"></script>
+
+<script>
+    function restoreUI() {
+        var divList = document.getElementById('divList');
+        divList.style.display = "block";
+        var divDetails = document.getElementById('divDetails');
+        divDetails.style.marginLeft = "420px";
+    }
+    var currentContact;
+    var c1 = new Contact('Chayapol','Moemeng','0899999999');
+    var c2 = new Contact('Natila','Ngaoprateeptham','0888888888');
+    var c3 = new Contact('Kamonchanok','A.','0877777777');
+    c1.picture = 'img/blank.jpg';
+    c2.picture = 'img/blank.jpg';
+    c3.picture = 'img/blank.jpg';
+    var list = [];  // create an array / list
+    list[0] = c1;
+    list[1] = c2;
+    list[2] = c3;
+    console.log(c1.fullname());
+    c1.sayHello();
+    c1.sayHi();
+
+        $(document).ready(function () {
+            // Populate list into table
+            console.log(list.length);
+            var tabList = document.getElementById('tabList');
+            //var tabList = $('#tabList');
+            for (var i in list) {
+                $('#tabList').append("<tr class='box-l hvr-fade'><td><img src='" + list[i].picture + "' class='avatar'></td><td><span class='fullname'>"+list[i].fullname()+"</span><br><span class='phone'>"+list[i].phone+"</span></td>");
+                $('#tabList tr').click(function (event) {
+                    $('#divList').css(
+                        { 'display' : 'none' }
+                    );
+                    $('#divDetails').css({ 'margin-left' : '0px'});
+                    console.log('clicked ' + i);
+                    currentContact = list[this.rowIndex];
+                    var clicked = this;
+                    console.log("c" + clicked);
+                    var strFullname = list[this.rowIndex].fullname();
+                    $('#spanFullname').html(strFullname);
+                    var strPic = list[this.rowIndex].picture;
+                    $('#picture').attr("src",strPic);
+                    var strPhone = "<input class='box' type='text' value=' " + list[this.rowIndex].phone + "'>";
+                    $('#spanPhone').html(strPhone);
+                    var strEmail = "<input class='box' type='text' value=' " + list[this.rowIndex].email + "'>";
+                    $('#spanEmail').html(strEmail);
+                    // $('#spanFullname').html(list[this].val().fullname());
+                    // $('#spanPhone').html(list[this.rowIndex].phone);
+                    // $('#spanEmail').html(list[this.rowIndex].email);
+                });
+                $('#tabList').last().after('</tr>');
+
+                // c0 = r.insertCell(0);
+                // c1 = r.insertCell(1);
+                // c0.innerHTML = "<img src='" + list[i].picture + "' class='avatar'>";
+                // c1.innerHTML = "<span class='fullname'>" + list[i].fullname() + "</span><br>" +
+                //                "<span class='phone'>" + list[i].phone + "</span>";
+            }
+        });
+    </script>
+<style>
+#divList, #divDetails {
+    font-family: "Verdana", "Geneva", sans-serif;
+
+    border: 1px solid black;
+    width: 400px;
+    height: 600px;
+    background: url("img/bg.jpg") no-repeat top center;
+    color: white;
+}
+
+#divList {
+    float: left;
+}
+
+#divDetails {
+    /*padding-left: 30px;*/
+    margin-left: 410px;
+    z-index: 999;   /* positive - top*/
+}
+</style>
+</head>
+<html>
+<body>
+    <div id="divList">
+        <h1 class="head">Contact List</h1>
+        <hr>
+        <table id="tabList">
+            
+        </table>
+        <span id="spanList">
+
+        </span>
+    </div>
+
+    <div id="divDetails">
+        <!-- <button onclick="restoreUI()" id="btnBack"><img width="32px" src="back.jpg" /></button> -->
+        <a onclick="restoreUI()" id="btnBack" class="hvr-icon-back back-btn"></a>
+        <hr>
+        <h1 class="text-center"><span id="spanFullname" class="name"></span></h1>
+        <img class="profile" id="picture"><br>
+         <p class="detail">Phone : <span id="spanPhone"></span></p>
+        <p class="detail">E-mail : <span id="spanEmail"></span></p>
+        <!-- <span id="spanDetails">
+        </span> -->
+    </div>
+
+</body>
+
+</html>
