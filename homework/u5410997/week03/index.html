@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact</title>
+<script src="contact.js"></script>
+<link rel="stylesheet" type="text/css" href="custom.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+
+<script>
+
+	function restoreUI() {
+        var divList = document.getElementById('divList');
+        divList.style.display = "block";
+        var divDetails = document.getElementById('divDetails');
+        divDetails.style.marginLeft = "420px";
+    }
+
+	var currentContact = [];
+	var c1 = new Contact('Chayapol','Moemeng','0899999999');
+	var c2 = new Contact('Natila','Ngaoprateeptham','0888888888');
+	var c3 = new Contact('Kamonchanok','A.','0877777777');
+	
+	// c1.picture = 'img/blank.jpg';
+	// c2.picture = 'img/blank.jpg';
+	// c3.picture = 'img/blank.jpg';
+
+// 	var list = new... ; not recommended
+	var list = [];
+	list[0] = c1;
+	list[1] = c2;
+	list[2] = c3;
+
+
+// 	Populate list into tabke
+
+	console.log(c1.fullname()); // to print to the console
+	c1.sayHello();
+	c1.sayHi();
+</script>
+
+<style>
+
+#divList, #divDetails {
+	font-family: "Verdana", "Geneva", sans-serif;
+
+	border: 1px solid black;
+	width: 400px;
+	height: 600px;
+	background: url("img/bg.jpg") no-repeat top center;
+	color: white;
+}
+
+#divList {
+	float: left;
+}
+
+#divDetails {
+	/*padding-left: 30px;*/
+	margin-left: 410px;
+	z-index: 999; 	/* positive - top*/
+}
+
+</style>
+
+</head>
+<body>
+
+	<div id="divList">
+		<h1 class="head">Contact List</h1>
+		<hr>
+		<table id="tabList">
+		</table>
+		<span id="spanList">
+			
+		<span>
+	</div>
+	
+	<div id="divDetails">
+		<!-- <button onclick="restoreUI()" id="btnBack"><img src="img/back.png" class="back hvr-icon-back"></button> -->
+		<a onclick="restoreUI()" id="btnBack" class="hvr-icon-back back-btn"></a>
+		<hr>
+		<h1 class="text-center"><span id="spanFullName" class="name"></span></h1>
+		<!-- <img id="profile" src=""> -->
+		<span id="spanProfile"></span>
+
+		<p class="detail">Phone : <span id="spanPhone"></span></p>
+		<p class="detail">E-mail : <span id="spanEmail"></span></p>
+	</div>
+
+	<script>
+		var tabList = document.getElementById('tabList');
+		for(var i in list){
+			var r = tabList.insertRow(tabList.rows.length); // insert at the last  --- to insert at the top change to 0
+			r.onclick = function(){
+				var divList = document.getElementById('divList');
+				divList.style.display ='none';
+				var divDetails = document.getElementById('divDetails');
+				divDetails.style.marginLeft='0px';
+
+				console.log('clicked' + i);
+				currentContact = list[this.rowIndex];
+				document.getElementById('spanProfile').innerHTML = "<img class='profile' src='" + list[this.rowIndex].picture + "'>";
+				document.getElementById('spanFullName').innerHTML = list[this.rowIndex].fullname();
+				document.getElementById('spanPhone').innerHTML = "<input class='box' type='text' value=' " + list[this.rowIndex].phone + "'>";
+				document.getElementById('spanEmail').innerHTML = "<input class='box' type='text' value=' " + list[this.rowIndex].email + "'>";
+
+			};
+			c0 = r.insertCell(0);
+			// c1 = r.insertCell(1);
+			// c2 = r.insertCell(2);
+			c0.innerHTML = "<div class='box-l hvr-fade'><div class='col-lg-5 col-md-5' style='float:left;'><img src='img/blank.jpg' class='avatar'></div><div class='col-lg-6 col-md-6 box-l-detail'><span class='fullname'>" + list[i].fullname() + "</span> <br><span class='phone'>" + list[i].phone +"</span></div></div>";
+			// c2.innerHTML = list[i].phone();
+		}
+
+
+
+	</script>
+
+</body>
+
+
+
+</html>
